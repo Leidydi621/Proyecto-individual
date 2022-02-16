@@ -37,19 +37,20 @@ export default function CreateRecipe() {
         dispatch(getDiets());
     }, [dispatch]);
 
-    function handleChange(e) {
-        e.preventDefault();
-        setInput((prevInput) => {   //// de esta manera el componente muestra los cambios (componentdidupdate?) para poder ir validando
-            const newInput = {
-                ...prevInput,
-                [e.target.name]: e.target.value
-            }
-            const validations = validate(newInput);
-            setErrors(validations)
-            return newInput
-        });
 
-    };
+    function handleChange(e){
+        setInput({
+            ...input,
+            [e.target.name]:e.target.value
+        })
+        setErrors(validate({
+            ...input,
+            [e.target.name]:e.target.value
+        }))
+      
+      
+    }
+
     
     function handleCheckBox(e) {
        
@@ -71,38 +72,39 @@ export default function CreateRecipe() {
         
     }
     
-    function handleSubmit(e) {
-         e.preventDefault();
+    function handleSubmit(e){
+        e.preventDefault();
+        if (Object.values(errors).length > 0) {
+            alert("Please complete the information required");
+        } else if (
+           input.name === '' && 
+           input.summary === '' && 
+           input.score === '' &&
+           input.healthScore === '' &&
+           input.steps === '' &&
+           !input.diets.length) {
+           alert("Please complete the form");}
+       else {
+         dispatch(createRecipe(input))
+        alert("Recipe Created!")
+        setInput({
+            name:"",
+            summary: "", 
+            score: "",
+            healthScore: "",
+            steps: "",
+            diets: [],     
+        })}
+    
+        history.push('/home')
+    }
 
-         if (Object.values(errors).length > 0) {
-             alert("Please complete the information required");
-         } else if (
-            input.name === '' && 
-            input.summary === '' && 
-            input.score === '' &&
-            input.healthScore === '' &&
-            input.steps === '' &&
-            !input.diets.length) {
-            alert("Please complete the form");}
-        else {
-            dispatch(createRecipe(input));
-            alert('New recipe added successfully!')
-            setInput({
-                name: "",
-                summary: '',
-                score: '',
-                healthScore: '',
-                steps: [],
-                diets: []
-            });
-            history.push('/home')
-        }
-    };
+
     
     
     return (
         <div className="addRecipe">
-            <h1 className="msg">Creat your own recipe!</h1>
+            <h1 className="msg">Create your own recipe!</h1>
             <form onSubmit={e => handleSubmit(e)}>
                 <div className="form">
                     <div className="prettierForm">
@@ -145,10 +147,11 @@ export default function CreateRecipe() {
                     <div className="checkSelect">
                         <label className="msgs">Diet Types:</label>
                         {diets.map(d =>{
+                            console.log(diets, 'recipe create')
                             return (
                                 <div key={d} className="checks">
                                     <label className="diets">{d}</label>
-                                    <input className="checks" type="checkbox" name={d} value={d} selected={input.diets.includes(d)} onChange={e => handleCheckBox(e)}/>
+                                    <input className="checks" type="checkbox" name={d} value={d} select={input.diets.includes(d)} onChange={e => handleCheckBox(e)}/>
                                 </div>
                             )
                         })}

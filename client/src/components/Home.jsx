@@ -110,13 +110,11 @@ export default function Home() {
             {
                 currentRecipes?.map(el=> {
                     return(
-                        <Link to= {'/detail'+ el.id} key={el.id}>
+                        <Link to= {'/home'+ el.id} key={el.id}>
                         <Card 
-                            image={el.image? 
-                                el.image : 'https://cdn.colombia.com/sdi/2019/01/29/5-recetas-para-preparar-en-menos-de-30-minutos-705865.jpg'
-                            } 
+                            image={el.image? el.image : 'https://cdn.colombia.com/sdi/2019/01/29/5-recetas-para-preparar-en-menos-de-30-minutos-705865.jpg'} 
                             name={el.name} 
-                            diets={el.diets}/> 
+                            diets={el.diets.map(e => e.name).join(', ')}/> 
                         </Link>
                     )
                 })

@@ -11,6 +11,7 @@ const getApiInfo = async () => {
     const apiUrl = await axios.get(`${API_URL}/recipes/complexSearch?apiKey=${MY_APIKEY}&addRecipeInformation=true&number=100`);
     const allData = await Promise.all(apiUrl.data.results)
     
+    
 
     const allRecipes = await allData.map(el => {
         return {
@@ -22,14 +23,7 @@ const getApiInfo = async () => {
             dishTypes:el.dishTypes,
             diets: el.diets.map(el => el), 
             summary: el.summary, // 
-            steps: el.analyzedInstructions.map(el => { //realice la busqueda de step dentro del array analyzed 
-                return el.steps?.map(el =>{ //dentro de step realice otro mapeo para que trajera lo que necesitaba.
-                    return{
-                        number: el.number,
-                        step: el.step,
-                    }
-                })
-            }),
+            steps: el.analyzedInstructions.map(el => el.steps?.map(el => el.step)),
             
         }
     })

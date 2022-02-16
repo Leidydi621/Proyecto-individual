@@ -13,13 +13,7 @@ export default function Card({image, name, diets}){
                     <h4 >{name}</h4>
                 </div>
                 <div>
-                    {diets?.map(el => {
-                        return(
-                            <h5 key={prevId++}>{el}</h5>
-                        )
-                    })
-                        
-                    }
+                    <span><h5>Type of Diet: <br/>{diets}</h5></span>
                 </div>
             </div>
         </div>

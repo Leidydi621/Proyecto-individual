@@ -33,7 +33,6 @@ router.post('/', async (req, res) => {
         res.send('Succesfull');
     }
 
-
 })
 
 
