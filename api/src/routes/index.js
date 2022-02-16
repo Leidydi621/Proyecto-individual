@@ -14,6 +14,5 @@ router.use('/', recipes); // rutas getByName, getById.
 router.use('/diet', diets); // ruta /types la cambie por diets
 router.use('/recipe', createRecipe); // ruta post
 
-//hola
 
 module.exports = router;

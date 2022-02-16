@@ -1,33 +1,14 @@
-.body{
-    /* background-image: url("./images/LandingPage.jpg"); */
-    background-repeat: no-repeat;
-    background-size: cover;
+.bkg{
+	background-image: url('https://st4.depositphotos.com/1868027/i/600/depositphotos_301910600-stock-photo-autumn-cooking-background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 700px;
 
-    height: 450px;
 }
 
-.button {
-	--offset: 10px;
-	--border-size: 2px;
-
-	display: block;
-	position: relative;
-	padding: 1.5em 3em;
-	appearance: none;
-	border: 0;
-	background: transparent;
-	color: #e55743;
-	text-transform: uppercase;
-	letter-spacing: 0.25em;
-	outline: none;
-	cursor: pointer;
-	font-weight: bold;
-	border-radius: 0;
-	box-shadow: inset 0 0 0 var(--border-size) currentcolor;
-	transition: background-color 0.8s ease;
-}
-
-.button:hover{
-    background: rgba(100, 0, 0, 0.03);
-}
-
+.btn{
+    background: rgb(233, 116, 7);
+    background-color: antiquewhite;
+    border-radius: 30px;
+  }
+  

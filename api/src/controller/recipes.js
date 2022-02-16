@@ -72,9 +72,13 @@ const getDbById = async (id) => {
 const getRecipeId = async (req, res) => {
     const {id} = req.params;
     const recipeArr = [];
+
+    console.log(id, 'controller Id')
     if (id ) {
         const recipeById = await axios.get(`${API_URL_ID}${id}/information?apiKey=${MY_APIKEY}&addRecipeInformation=true&number=100`)
         const recipe = await recipeById.data;
+
+        console.log(recipeById, 'controler recipe')
         recipeArr.push(recipe);
 
         const recipeId = recipeArr.map(el => {

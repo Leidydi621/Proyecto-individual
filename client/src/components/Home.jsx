@@ -6,12 +6,15 @@ import {
     getDiets,
     filterRecipesByDiets,
     aplhabeticalSort, 
-    scoreSort
+    scoreSort,
+    
 } from '../actions';
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
+import stylesH from './Home.module.css'
+
 
 
 export default function Home() {
@@ -71,13 +74,12 @@ export default function Home() {
 
     
 
-
         // renderizo mis componentes
     return (
         <div>
             <Link to= '/recipe'>Create Recipe</Link>
             <h1>MY CUSINART RECIPES</h1>
-            <button onClick={e=> {handleClick(e)}}>
+            <button className={stylesH.btn} onClick={e=> {handleClick(e)}}>
                 Charge all recipes
             </button>
             <div>
@@ -105,12 +107,14 @@ export default function Home() {
                     allRecipes={allRecipes.length}
                     paginado={paginado}
                 />
-                </div>
+                </div >
 
+            <div className={stylesH.gri}>
             {
                 currentRecipes?.map(el=> {
                     return(
-                        <Link to= {'/home'+ el.id} key={el.id}>
+                        <Link to= {'/detail/'+ el.id} key={el.id} > 
+
                         <Card 
                             image={el.image? el.image : 'https://cdn.colombia.com/sdi/2019/01/29/5-recetas-para-preparar-en-menos-de-30-minutos-705865.jpg'} 
                             name={el.name} 
@@ -119,7 +123,7 @@ export default function Home() {
                     )
                 })
             }
-
+            </div>
             </div>
 
         </div>

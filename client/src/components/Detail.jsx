@@ -1,87 +1,47 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetails } from '../actions';
-import { Link } from 'react-router-dom'
-import "./Detail.module.css";
+import { getDetail } from '../actions';
+import { useEffect } from 'react';
 
 
-export default function RecipeDetails(props) {
+
+function Detail(props) {
+
     const dispatch = useDispatch();
-    const id = props.match.params.id;
-    
-    
+
     useEffect(() => {
-        dispatch(getDetails(id))
-    }, [dispatch, id]);
-    
-    
-    const recipeDetails = useSelector(state => state.recipeDetails);
-    
-    return (
+        dispatch(getDetail(props.match.params.id));
         
-        <div className="details" key={id}>            
-                  
-            <div className="divimg">
-                <img className="detailImg" 
-                src={recipeDetails.image ? 
-                recipeDetails.image : 
-                'https://images.unsplash.com/photo-1635321593217-40050ad13c74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1748&q=80'} alt="Pic not found"/>
-            </div>
+    }, [dispatch]);
 
-            <h1 className="texts">{recipeDetails.name}</h1>
+    const myRecipe  = useSelector((state) => state.detail);
+ 
+    
 
-            {recipeDetails.dishTypes ?
-            <div className="ddsh">
-                <h2 className="texts">Dish Type: </h2>
-                {recipeDetails.dishTypes?.map(e => {
-                    return(
-                        <h2 className="dishesanddiets" key={e}>{e}</h2>
-                    )
-                })}
-            </div> :
-            <br />
+    
+  return (
+    <div>
+        {
+            myRecipe?
+                    <div className='detailContainer'>
+                        <div className='detailCard'>
+
+                            <h1>{myRecipe[0].name}</h1>
+                            <img className='img' src={myRecipe[0].image} alt='' width='450px' height='400px' />
+                            <h3>Health Score: {myRecipe[0].healthScore} </h3>
+                            <h3>Score: {myRecipe[0].score}</h3>
+                            <h3>Summary: </h3><p><b>{myRecipe[0].summary}</b></p>
+                            <h3>Diets: </h3> <b>{myRecipe[0].diets.map(el => el.name + ' ') } </b>
+                            <h3>Steps: </h3> <b>{myRecipe[0].steps} </b>
+
+                        </div>
+                    </div>
+                    : <p>Loading...</p>
             }
-
-            <div className="ddsh">
-                <h2 className="texts">Diet Type: </h2> 
-                {recipeDetails.diets ? recipeDetails.diets.map(e => {
-                    return(
-                        <h2 className="dishesanddiets" key={e}>{e}</h2>
-                    )
-                }) :
-                recipeDetails.diets?.map(e => {
-                    return(
-                        <h2 className="dishesanddiets" key={e.name}>{e.name}</h2>
-                    )
-                })}
-            </div>
-
-            <div className="ddsh">
-                <h3 className="texts">Summary: </h3>
-                <p className="summary">{recipeDetails.summary?.replace(/<[^>]*>/g, '')}</p>
-            </div>
-            
-            <div className="ddsh">
-                <h3 className="scores">Score: {recipeDetails.score}</h3>
-                <h3 className="scores">Healthiness points: {recipeDetails.healthScore}</h3>
-            </div>   
-
-            <div className="ddsh">
-                <h3 className="texts">Steps: </h3>
-                <ul className="steps">{Array.isArray(recipeDetails.steps) ? recipeDetails.steps.map(e => {
-                    return(
-                        <li key={e.number}>{e.step}</li>
-                        )
-                }) :
-                <li>{recipeDetails.steps}</li>
-                }</ul>
-            </div>
-            
-            <Link to="/home"><button className="backButton">Go back to recipes</button></Link>
-            
-        </div>
-
-    )      
-        
+            <Link to='/home'><button className='btnDetail'>Back   </button></Link>
+    </div>
+  )
 }
+
+export default Detail

@@ -5,9 +5,9 @@ export const FILTER_BY_DIETS = 'FILTER_BY_DIETS'
 export const GET_DIETS = 'GET_DIETS'
 export const SEARCH_RECIPE = 'SEARCH_RECIPE'
 export const CREATE_RECIPE = 'CREATE_RECIPE'
-export const GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL'
 export const ALPHABETICAL_SORT = 'ALPHABETICAL_SORT'
 export const SCORE_SORT = 'SCORE_SORT'
+export const GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL'
 
 
 
@@ -74,22 +74,16 @@ export function createRecipe (payload){
     }
 }
 
-export function getDetails(payload){
-    return async function (dispatch){
-        try {
-            const response = await axios.post(`http://localhost:3001/recipes/${payload}`);
-            
+export function getDetail(id){
+    return async function(dispatch){
+        
+            var json = await axios.get('http://localhost:3001/recipes/' + id);
             return dispatch({
-            type: GET_RECIPE_DETAIL,
-            payload :response
+                type: GET_RECIPE_DETAIL,
+                payload: json.data
             })
-            
-        } catch (e) {
-            console.log(e)
-        }
     }
 }
-
 
 
 export function filterRecipesByDiets(payload){
