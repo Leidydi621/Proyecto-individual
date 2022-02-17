@@ -22,6 +22,16 @@ export default function SearchBar(){
         setInput('')
     }
 
+    // const filtrar = (e) =>{
+    //     const recipes = getRecipes()
+    //     var result = recipes.filter((el)=>{
+    //         if(el.name.toString().toLowerCase().includes(e.toLowerCase())){
+    //             return el;
+    //         }
+    //     });
+    //     setInput(result)
+    // }
+
     return(
         <div>
             <input type="text" placeholder="Search recipe by name" value={input} onChange={e => handleChange(e)}/>

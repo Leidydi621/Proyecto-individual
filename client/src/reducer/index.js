@@ -34,13 +34,14 @@ function rootReducer (state = initialState, action){
 
             
         case FILTER_BY_DIETS:
-            const allRecipes= state.allRecipes
-            const statusFiltered =  allRecipes.filter(r => r.diets?.some(d => d.toLowerCase() === action.payload.toLowerCase())) 
-            
-            return{
-                ...state,
-                recipes : statusFiltered
-            }
+          const allRecipes = state.recipes
+
+          let dietFilter = action.payload === 'ALL' ? state.recipes : allRecipes.filter((i) => i.diets.includes(action.payload));
+          return {
+              ...state,
+              recipes: dietFilter
+          }
+
 
             case ALPHABETICAL_SORT:   
             let sortedRecipes = [...state.recipes]       
@@ -61,23 +62,20 @@ function rootReducer (state = initialState, action){
             };
   
           case SCORE_SORT:
-            let sortedRecipesByScore = [...state.recipes] 
-            sortedRecipesByScore = action.payload === 'asc' ?
-            state.recipes.sort(function(a, b) {
-              if (a.score > b.score) return 1;
-              if (a.score < b.score) return -1;
-              return 0;
+            let totalScore = action.payload === 'asc' ? state.recipes.sort(function(a, b){
+                if(a.score > b.score) return 1
+                if(a.score < b.score) return -1
+                return 0
             }) :
-            state.recipes.sort(function(a, b) {
-              if (a.score < b.score) return 1;
-              if (a.score > b.score) return -1;
-              return 0;
-            });
+            state.recipes.sort(function(a, b){
+                if(b.score > a.score) return 1
+                if(b.score < a.score) return -1
+                return 0
+            })
             return {
-              ...state,
-              recipes: sortedRecipesByScore
-            };
-  
+                ...state,
+                recipes: totalScore
+            }  
             
         case SEARCH_RECIPE:
             return{
