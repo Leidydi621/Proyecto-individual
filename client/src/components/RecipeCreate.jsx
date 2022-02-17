@@ -147,7 +147,7 @@ export default function CreateRecipe() {
                     <div className="checkSelect">
                         <label className="msgs">Diet Types:</label>
                         {diets.map(d =>{
-                            console.log(diets, 'recipe create')
+                            
                             return (
                                 <div key={d} className="checks">
                                     <label className="diets">{d}</label>

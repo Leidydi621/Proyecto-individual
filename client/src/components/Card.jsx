@@ -11,12 +11,12 @@ export default function Card(data){
             <div>
                 <div >
                 <div >{data.name}</div>
-                <div >⛧⛧{data.spoonacularScore}⛧⛧</div>
+                <div >{data.spoonacularScore}</div>
                 </div>
             <Link to = {`/details/${data.id}`}>
                 
             </Link>
-                <img src={data.image} alt="" />
+                <img src={data.image} alt= "img not found" width= "150px" height= "150px" />
                 
                 <div >{data.diets?.map((e) => {
         

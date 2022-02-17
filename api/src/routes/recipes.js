@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 //importo las funciones del controlador
-const { allRecipes, getRecipeId} = require('../controller/recipes');
+const { allRecipes, getRecipeById} = require('../controller/recipes');
 
 
 const router = Router();
@@ -25,7 +25,7 @@ router.get('/recipes', async (req, res) => {
 
 //GET /recipes/{idReceta}:
 
-router.get('/recipes/:id', getRecipeId)
+router.get('/recipes/:id', getRecipeById)
 
 // GET /types
 

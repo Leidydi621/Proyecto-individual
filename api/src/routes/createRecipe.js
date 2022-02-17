@@ -9,21 +9,25 @@ const router = Router();
 router.post('/', async (req, res) => {
     
     let{
-        name, 
-        diets,
+        name,
         summary,
+        score,
+        healthScore,
+        steps,
+        createdInDb,
+        diets   
     } = req.body
     
     if(!name || !summary){
         return res.status(500).send("Upss! Incomplete data, please try again.");
     } else {
         let recipeCreate = await Recipe.create({ 
-            name : req.body.name,
-            img: req.body.img,
-            summary : req.body.summary,
-            score : Number(req.body.score),
-            healthScore: Number(req.body.healthScore),
-            steps : req.body.steps,
+            name,
+            summary,
+            score,
+            healthScore,
+            steps,
+            createdInDb
         })
         let dietDB = await Diet.findAll({ 
             where: {name: diets}

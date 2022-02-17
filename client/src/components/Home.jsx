@@ -84,8 +84,8 @@ export default function Home() {
             </button>
             <div>
                 <select onChange={e => handleScoreSort(e)}>
-                    <option value= 'acs'>Ascendent</option>
-                    <option value= 'desc'>Descendent</option>
+                    <option value= 'Minor'>Minor Score</option>
+                    <option value= 'Major'>Major Score</option>
                 </select>
                 <select onChange={handlefilterRecipesByDiets}>
                     <option value='diets'>All Diet</option>

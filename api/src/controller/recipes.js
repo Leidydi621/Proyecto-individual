@@ -58,27 +58,31 @@ const allRecipes = async()=> {
 
 
 const getDbById = async (id) => {
-    return await Recipe.findByPk(id, {
-        include: {
+    
+    if (id.length > 10) {
+        const getId = await Recipe.findOne({
+          where: {
+            id: id,
+          },
+          include: {
             model: Diet,
-            attributes: ['name'],
-            through: {
-                attributes: [],
-            }
-        }
-    });
+          },
+        });
+        return getId
+    }
 }
 
-const getRecipeId = async (req, res) => {
-    const {id} = req.params;
+
+const getApiRecipeId = async (id) => {
+    
     const recipeArr = [];
 
-    console.log(id, 'controller Id')
+
     if (id ) {
         const recipeById = await axios.get(`${API_URL_ID}${id}/information?apiKey=${MY_APIKEY}&addRecipeInformation=true&number=100`)
         const recipe = await recipeById.data;
 
-        console.log(recipeById, 'controler recipe')
+        
         recipeArr.push(recipe);
 
         const recipeId = recipeArr.map(el => {
@@ -90,31 +94,35 @@ const getRecipeId = async (req, res) => {
                 image: el.image, 
                 dishTypes:el.dishTypes,
                 diets: el.diets.map(el => el), 
-                summary: el.summary,  
-                steps: el.analyzedInstructions.map(el => { 
-                    return{
-                        steps: el.steps?.map(el =>{ 
-                            return{
-                                number: el.number,
-                                step: el.step,
-                                ingredients:el.ingredients?.map(el => el.name) 
-                            }
-                        })
-                    }
-                }),
+                summary: el.summary, 
+                instructions: el.instructions                 
        
             }
         
         })
 
-        res.send(recipeId);      
-    } else {
-        let dbRecipesById = await getDbById(id);            
-        return res.status(200).json(dbRecipesById)
-    }
-
+        return recipeId      
+    } 
 }
 
+
+
+const getRecipeById = async (req, res) => {
+    const {id} = req.params;
+    const db = await getDbById(id);
+        if (!db){
+            const api = await getApiRecipeId(id);
+            if(api){
+                res.send(api)
+            }else{
+                res.status(404).json({
+                    error: 'There is no recipe'
+                })
+            }
+        }else{ 
+            res.send(db)
+    }
+}
 
 
     
@@ -122,4 +130,4 @@ const getRecipeId = async (req, res) => {
 
 
 
-module.exports = { getApiInfo, getDbInfo, allRecipes, getRecipeId}
+module.exports = { getApiInfo, getDbInfo, allRecipes, getRecipeById}

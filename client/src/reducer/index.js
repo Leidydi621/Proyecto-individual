@@ -62,14 +62,23 @@ function rootReducer (state = initialState, action){
             };
   
           case SCORE_SORT:
-            let totalScore = action.payload === 'asc' ? state.recipes.sort(function(a, b){
-                if(a.score > b.score) return 1
-                if(a.score < b.score) return -1
+            let totalScore = action.payload === 'Minor'?
+            state.allRecipes.sort(function(a,b){
+                if (a.score > b.score){
+                    return 1
+                }
+                if (b.score > a.score){
+                    return -1
+                }
                 return 0
-            }) :
-            state.recipes.sort(function(a, b){
-                if(b.score > a.score) return 1
-                if(b.score < a.score) return -1
+            }):
+            state.recipes.sort(function(a,b){
+                if (a.score > b.score){
+                    return -1
+                }
+                if (b.score > a.score){
+                    return 1
+                }
                 return 0
             })
             return {
