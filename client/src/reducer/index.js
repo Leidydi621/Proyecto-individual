@@ -4,15 +4,12 @@ import {
     FILTER_BY_DIETS, 
     SEARCH_RECIPE, 
     CREATE_RECIPE, 
-    GET_RECIPE_DETAIL, 
+    GET_RECIPE_ID, 
     ALPHABETICAL_SORT,
     SCORE_SORT,
-    getDetail
 
 } from '../actions'
 
-const hola = getDetail()
-console.log(hola)
 
 const initialState = {
     recipes : [],
@@ -95,7 +92,7 @@ function rootReducer (state = initialState, action){
                 diets: action.payload
             }
               
-        case GET_RECIPE_DETAIL:
+        case GET_RECIPE_ID:
         return {
           ...state,
           detail: action.payload, 

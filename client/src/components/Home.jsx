@@ -94,7 +94,7 @@ export default function Home() {
                     ))}
                 </select>
                 <select className="select" name="alphabetical" onChange={e => handleAlphabeticalSort(e)}>
-                    <option disabled selected>Alphabetical</option>
+                    <option value="DEFAULT" disabled selected>Alphabetical</option>
                     <option value="atoz">A to Z</option>
                     <option value="ztoa">Z to A</option>
                 </select>

@@ -7,7 +7,7 @@ export const SEARCH_RECIPE = 'SEARCH_RECIPE'
 export const CREATE_RECIPE = 'CREATE_RECIPE'
 export const ALPHABETICAL_SORT = 'ALPHABETICAL_SORT'
 export const SCORE_SORT = 'SCORE_SORT'
-export const GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL'
+export const GET_RECIPE_ID = 'GET_RECIPE_ID'
 
 
 
@@ -74,17 +74,17 @@ export function createRecipe (payload){
     }
 }
 
-export function getDetail(id){
-    return async function(dispatch){
-        
-            var json = await axios.get('http://localhost:3001/recipes/' + id);
-            return dispatch({
-                type: GET_RECIPE_DETAIL,
-                payload: json.data
+export function getRecipeById(id) {
+    return (dispatch) => {
+        axios.get(`http://localhost:3001/recipes/${id}`)
+            .then(res => {
+                dispatch({
+                    type: GET_RECIPE_ID,
+                    payload: res.data
+                })
             })
     }
 }
-
 
 export function filterRecipesByDiets(payload){
     return {

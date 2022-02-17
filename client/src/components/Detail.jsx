@@ -1,47 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetail } from '../actions';
+import { getRecipeById } from '../actions';
 import { useEffect } from 'react';
+import { useParams } from "react-router";
 
 
 
-function Detail(props) {
-
+function Detail() {
+    let { id } = useParams();
     const dispatch = useDispatch();
+    const detail = useSelector((state) => state.detail);
+    
+
 
     useEffect(() => {
-        dispatch(getDetail(props.match.params.id));
+        dispatch(getRecipeById(id));
+    }, [dispatch, id]);
+
+    const diets  = detail[0] ? detail[0].diets : detail.diets;
+    
+    
+    return (
+        <div >
         
-    }, [dispatch]);
-
-    const myRecipe  = useSelector((state) => state.detail);
- 
-    
-
-    
-  return (
-    <div>
-        {
-            myRecipe?
-                    <div className='detailContainer'>
-                        <div className='detailCard'>
-
-                            <h1>{myRecipe[0].name}</h1>
-                            <img className='img' src={myRecipe[0].image} alt='' width='450px' height='400px' />
-                            <h3>Health Score: {myRecipe[0].healthScore} </h3>
-                            <h3>Score: {myRecipe[0].score}</h3>
-                            <h3>Summary: </h3><p><b>{myRecipe[0].summary}</b></p>
-                            <h3>Diets: </h3> <b>{myRecipe[0].diets.map(el => el.name + ' ') } </b>
-                            <h3>Steps: </h3> <b>{myRecipe[0].steps} </b>
-
-                        </div>
-                    </div>
-                    : <p>Loading...</p>
-            }
-            <Link to='/home'><button className='btnDetail'>Back   </button></Link>
-    </div>
-  )
+             {detail &&(
+            <div >
+               
+            <div  >{detail[0] ? detail[0].name : detail.name}</div>
+            <img src={detail[0] ? detail[0].image : detail.image} alt="" />
+            <div  >⛧⛧{detail[0] ? detail[0].spoonacularScore : detail.spoonacularScore}⛧⛧</div>
+            <div >Health Score: {detail[0] ? detail[0].healthScore : detail.healthScore} </div>
+            <div >{diets?.map((e) => {
+                    return (
+                        <h5 key={e}> {e.name ? e.name: e} </h5> 
+                    )
+                })} </div>
+                <h2 >Summary</h2>
+            <div > {detail[0] ?  detail[0].summary.replace(/<[^>]*>?/g, '') : detail.summary} </div>
+                <h2 >Instructions</h2>
+            <div > {detail[0] ? detail[0].instructions : detail.instructions} </div>
+            
+            
+            </div>
+            )}
+             <Link to= '/home'>
+                    <button >Go Home...</button>
+                </Link>
+        </div>
+    )
 }
 
 export default Detail
