@@ -10,7 +10,6 @@ export const SCORE_SORT = 'SCORE_SORT'
 export const GET_RECIPE_ID = 'GET_RECIPE_ID'
 
 
-
 export function getRecipes(){
     return async function(dispatch){
         let json = await axios.get('http://localhost:3001/recipes'); 
@@ -55,7 +54,6 @@ export function getRecipesByName(payload){
 
     }
 }
-
 
 export function createRecipe (payload){
     return async function(dispatch){

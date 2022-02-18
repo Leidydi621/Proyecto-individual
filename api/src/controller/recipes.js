@@ -10,7 +10,7 @@ const getApiInfo = async () => {
     
     const apiUrl = await axios.get(`${API_URL}/recipes/complexSearch?apiKey=${MY_APIKEY}&addRecipeInformation=true&number=100`);
     const allData = await Promise.all(apiUrl.data.results)
-    
+
     
 
     const allRecipes = await allData.map(el => {
@@ -116,7 +116,7 @@ const getRecipeById = async (req, res) => {
                 res.send(api)
             }else{
                 res.status(404).json({
-                    error: 'There is no recipe'
+                    error: 'Recipe not found'
                 })
             }
         }else{ 

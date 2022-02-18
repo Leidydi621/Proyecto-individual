@@ -25,7 +25,7 @@ export default function Home() {
     const allRecipes = useSelector((state) => state.recipes) // me traigo todo lo que esta en el estado de recipes.
   
     const [currentPage, setCurrentPage] = useState(1)
-    const [recipesPerPage, setRecipesPerPage] = useState(9) //seteo la cantidad de cartas que quiero que se muestre.
+    const [recipesPerPage] = useState(9) //seteo la cantidad de cartas que quiero que se muestre.
     const indexOfLastRecipe = currentPage * recipesPerPage // me muestra en la pagina actual 9 recetas
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage //
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe)

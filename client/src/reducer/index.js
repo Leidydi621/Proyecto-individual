@@ -87,9 +87,14 @@ function rootReducer (state = initialState, action){
             }  
             
         case SEARCH_RECIPE:
-            return{
-                ...state,
-                recipes : action.payload
+            if (action.payload.length <1){
+                alert("Recipe not found")
+            } else{
+
+                return{
+                    ...state,
+                    recipes : action.payload
+                }
             }
             
         case GET_DIETS:
@@ -98,6 +103,7 @@ function rootReducer (state = initialState, action){
                 ...state,
                 diets: action.payload
             }
+          
               
         case GET_RECIPE_ID:
         return {

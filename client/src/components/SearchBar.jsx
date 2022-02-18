@@ -24,6 +24,7 @@ export default function SearchBar(){
     }
 
 
+
     return(
     <div className={style.search}>
             <input className={style.searchInput} type="text" placeholder="Search recipe by name" value={input} onChange={e => handleChange(e)}/>
