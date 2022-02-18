@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getRecipesByName } from '../actions';
 
+import style from './SearchBar.module.css';
 
 export default function SearchBar(){
     const dispatch = useDispatch()
@@ -22,20 +23,11 @@ export default function SearchBar(){
         setInput('')
     }
 
-    // const filtrar = (e) =>{
-    //     const recipes = getRecipes()
-    //     var result = recipes.filter((el)=>{
-    //         if(el.name.toString().toLowerCase().includes(e.toLowerCase())){
-    //             return el;
-    //         }
-    //     });
-    //     setInput(result)
-    // }
 
     return(
-        <div>
-            <input type="text" placeholder="Search recipe by name" value={input} onChange={e => handleChange(e)}/>
-            <button type="submit" onClick={e => handleSubmit(e)}>Search</button>
+    <div className={style.search}>
+            <input className={style.searchInput} type="text" placeholder="Search recipe by name" value={input} onChange={e => handleChange(e)}/>
+            <button className={style.searchButton} type="submit" onClick={e => handleSubmit(e)}>Search</button>
         </div>
     )
 }

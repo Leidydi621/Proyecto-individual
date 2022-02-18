@@ -1,28 +1,32 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-let prevId = 1;
+import styles from './Card.module.css';
+
+
+
+
 export default function Card(data){
 
     return (
 
-        <div >
+        <div className={styles.card}>
         <div >
             <div>
                 <div >
-                <div >{data.name}</div>
-                <div >{data.spoonacularScore}</div>
+                <div className={styles.name}>{data.name}</div>
+                <div >{data.score}</div>
                 </div>
             <Link to = {`/details/${data.id}`}>
                 
             </Link>
-                <img src={data.image} alt= "img not found" width= "150px" height= "150px" />
+                <img className={styles.img}src={data.image} alt= "img not found" width= "150px" height= "150px" />
                 
                 <div >{data.diets?.map((e) => {
         
                     return (
                         
-                        <p key={e}> {e.name ? e.name : e} </p>
+                        <p className={styles.diet} key={e}> {e.name ? e.name : e} </p>
                         
                     )
                    
@@ -33,19 +37,5 @@ export default function Card(data){
         </div>
         
     )  
-        // <div >
-        //     <div id="card">
-        //         <div>
-        //             <img  src = {image} alt= "img not found" width= "150px" height= "150px"/>
-        //         </div>
-        //         <div>
-        //             <h4 >{name}</h4>
-        //         </div>
-        //         <div>
-        //             <span><h5>Type of Diet: {diets}</h5></span>
-        //         </div>
-        //     </div>
-        // </div>
-    
 
 }

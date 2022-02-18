@@ -13,7 +13,10 @@ import {Link} from 'react-router-dom';
 import Card from './Card';
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
+
 import stylesH from './Home.module.css'
+
+
 
 
 
@@ -76,24 +79,26 @@ export default function Home() {
 
         // renderizo mis componentes
     return (
-        <div>
-            <Link to= '/recipe'>Create Recipe</Link>
-            <h1>MY CUSINART RECIPES</h1>
-            <button className={stylesH.btn} onClick={e=> {handleClick(e)}}>
+        <div className={stylesH.home}>
+            <Link to= '/recipe'>
+            <button className={stylesH.addButton}>Create Recipe</button>  
+            </Link>
+                <h1 className={stylesH.initialMsg}>MY CUSINART RECIPES</h1>
+            <button className={stylesH.refreshButton} onClick={e=> {handleClick(e)}}>
                 Charge all recipes
             </button>
             <div>
-                <select onChange={e => handleScoreSort(e)}>
+            <select className={stylesH.select} onChange={e => handleScoreSort(e)}>
                     <option value= 'Minor'>Minor Score</option>
                     <option value= 'Major'>Major Score</option>
                 </select>
-                <select onChange={handlefilterRecipesByDiets}>
-                    <option value='diets'>All Diet</option>
+                <select className={stylesH.select} onChange={handlefilterRecipesByDiets}>
+                    <option className={stylesH.filters} value='diets'>All Diet</option>
                     {diets.map(e=> (
                         <option key={e}>{e}</option>
                     ))}
                 </select>
-                <select className="select" name="alphabetical" onChange={e => handleAlphabeticalSort(e)}>
+                <select className={stylesH.select} name="alphabetical" onChange={e => handleAlphabeticalSort(e)}>
                     <option value="DEFAULT" disabled selected>Alphabetical</option>
                     <option value="atoz">A to Z</option>
                     <option value="ztoa">Z to A</option>

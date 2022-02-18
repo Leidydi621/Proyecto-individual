@@ -5,6 +5,7 @@ import { getRecipeById } from '../actions';
 import { useEffect } from 'react';
 import { useParams } from "react-router";
 
+import style from './Detail.module.css'
 
 
 function Detail() {
@@ -22,30 +23,32 @@ function Detail() {
     
     
     return (
-        <div >
+        <div className={style.details}>
         
              {detail &&(
-            <div >
+            <div className={style.divimg}>
                
-            <div  >{detail[0] ? detail[0].name : detail.name}</div>
-            <img src={detail[0] ? detail[0].image : detail.image} alt="" />
-            <div  >⛧⛧{detail[0] ? detail[0].spoonacularScore : detail.spoonacularScore}⛧⛧</div>
-            <div >Health Score: {detail[0] ? detail[0].healthScore : detail.healthScore} </div>
-            <div >{diets?.map((e) => {
+            <div className={style.texts} >{detail[0] ? detail[0].name : detail.name}</div>
+            <img className={style.detailImg}src={detail[0] ? detail[0].image : detail.image} alt="" />
+            <div className={style.texts}>Score: {detail[0] ? detail[0].score : detail.score}</div>
+            <div className={style.texts}>Health Score: {detail[0] ? detail[0].healthScore : detail.healthScore} </div>
+            <div className={style.ddsh}>
+                <h2 className={style.texts}>Diet type:</h2>
+                {diets?.map((e) => {
                     return (
-                        <h5 key={e}> {e.name ? e.name: e} </h5> 
+                        <h5 className={style.texts} key={e}> {e.name ? e.name: e} </h5> 
                     )
                 })} </div>
-                <h2 >Summary</h2>
-            <div > {detail[0] ?  detail[0].summary.replace(/<[^>]*>?/g, '') : detail.summary} </div>
-                <h2 >Instructions</h2>
-            <div > {detail[0] ? detail[0].instructions : detail.instructions} </div>
+                <h2 className={style.texts}>Summary</h2>
+            <div className={style.texts}> {detail[0] ?  detail[0].summary.replace(/<[^>]*>?/g, '') : detail.summary} </div>
+                <h2 className={style.texts}>Instructions</h2>
+            <div className={style.texts}> {detail[0] ? detail[0].instructions : detail.instructions} </div>
             
             
             </div>
             )}
              <Link to= '/home'>
-                    <button >Go Home...</button>
+                    <button className={style.backButton}>Go Home...</button>
                 </Link>
         </div>
     )

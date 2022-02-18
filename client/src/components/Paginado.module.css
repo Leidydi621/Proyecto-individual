@@ -7,10 +7,18 @@
 
   .styleBtn{
     
-    background: rgb(233, 116, 7);
-    background-color: antiquewhite;
-    border-radius: 30px;
-    transition: transform 0.3s ease;
-    
+  cursor: pointer;
+  justify-content: center;
+  background-color: rgb(231, 218, 218);
+  border-color: rgb(231, 218, 218);
+  box-shadow: 3px 5px 1px rgb(112, 44, 44);
+  color:  rgb(6, 6, 75);
+  font-style: italic;
+  font-weight: 700;    
+  text-shadow: 6px 4px 5px rgba(0,0,0,0.43);
+  border-radius: 7px;
+  height: 30px;    
+  font-size: 15px;	
+  font-weight: 600;    
     
 }
